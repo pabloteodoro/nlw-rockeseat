@@ -3,7 +3,8 @@ import { createId } from '@paralleldrive/cuid2'
 
 export const goals = pgTable('goals', {
 
-    id: text('id').primaryKey().$defaultFn(() => createId()),
+    id: text('id').primaryKey()
+    .$defaultFn(() => createId()),
     title: text('title').notNull(),
     desiredWeeklyFrequency: integer('desired_weekly_frequency').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true })
@@ -12,7 +13,7 @@ export const goals = pgTable('goals', {
 })
 
 export const goalCompletions = pgTable('goal_completions', {
-    
+
     id: text('id').primaryKey(),
     goalId: text('goal_id)')
     .references(() => goals.id)
